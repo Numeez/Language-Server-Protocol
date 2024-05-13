@@ -3,7 +3,6 @@ package rpc_test
 import (
 	
 	"testing"
-
 	"github.com/Numeez/Language-Server-Protocol/rpc"
 )
 
