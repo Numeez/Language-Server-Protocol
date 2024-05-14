@@ -9,7 +9,7 @@ type Request struct{
 
 }
 
-type Reponse struct{
+type Response struct{
 	RPC string `json:"jsonrpc"`
 	ID *int `json:"id,omitempty"`
 	Result string `json:"result"`
