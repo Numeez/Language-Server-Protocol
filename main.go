@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"encoding/json"
+	"io"
 
 	"log"
 	"os"
@@ -63,11 +64,26 @@ func handleMessage(logger *log.Logger,state analysis.State,method string, conten
 		for _,change := range request.Params.ContentChanges{
 			state.UpdateDocument(request.Params.TextDocument.URI,change.Text)
 		}
+	case "textDocument/didHover":
+		var request lsp.HoverRequest
+		
+		if err := json.Unmarshal(content,&request); err!=nil{
+			logger.Printf("textDocument/didHover : %s",err)
+			return 
+		}
+
+		
+	
 		
 
 	}
 
 
+}
+
+func writeResponse(writer io.Writer,msg any){
+	reply:=rpc.EncodeMessage(msg)
+	writer.Write([]byte(reply))
 }
 
 func getLogger(filename string) *log.Logger{
